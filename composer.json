@@ -29,8 +29,7 @@
     "hyperf/async-queue": "~2.0.0",
     "hyperf/model-cache": "~2.0.0",
     "hyperf-plus/admin": "^2.0",
-    "hyperf-plus/swagger": "^1.0",
-    "overtrue/wechat": "^5.1"
+    "hyperf-plus/swagger": "^1.0"
   },
   "require-dev": {
     "swoole/ide-helper": "^4.5",
@@ -38,8 +37,7 @@
     "mockery/mockery": "^1.0",
     "phpstan/phpstan": "^0.12",
     "hyperf/devtool": "~2.0.0",
-    "hyperf/testing": "~2.0.0",
-    "hyperf/watcher": "^2.0"
+    "hyperf/testing": "~2.0.0"
   },
   "suggest": {
     "ext-openssl": "Required to use HTTPS.",
