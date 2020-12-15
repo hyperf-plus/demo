@@ -163,11 +163,11 @@ class Order extends AbstractAdminController
         $form->action(route('order/deliver'));
         $form->isGetData(false);
         $real_name = $row->address->real_name;
-        $phone = $row->address->phone;
-        $address = $row->address->province
-            . $row->address->city
-            . $row->address->district
-            . $row->address->detail;
+        $phone = ($row->address->phone??'');
+        $address = ($row->address->province??'')
+            . ($row->address->city??'')
+            . ($row->address->district??'')
+            . ($row->address->detail??'');
 
         $form->item('id', '订单ID', 'id')->defaultValue($row->id)->component(Input::make()->readonly());
         $form->item('real_name', '收货人')->defaultValue($real_name)->component(Input::make()->readonly());
