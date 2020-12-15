@@ -22,6 +22,7 @@ use HPlus\UI\Components\Form\Input;
 use HPlus\UI\Components\Form\Select;
 use HPlus\UI\Components\Form\Upload;
 use HPlus\UI\Components\Grid\Boole;
+use HPlus\UI\Components\Grid\Route;
 use HPlus\UI\Components\Grid\Tag;
 use HPlus\UI\Components\Widgets\Button;
 use HPlus\UI\Components\Widgets\Dialog;
@@ -87,6 +88,10 @@ class Merchant extends AbstractAdminController
         $grid->column('address', '商户地址')->defaultValue('-');
         $grid->column('manages.nickname', '管理员')->component(Tag::make());
         $grid->column('sales', '销量');
+        $grid->column('link', '自定义链接')->customValue(function () {
+            return '链接名称';
+            # 取表格行字段可以用参数 {字段}
+        })->component(Route::make("list?id={merchant_id}"));
         $grid->column('status', '商户状态')->component(Boole::make());
         return $grid;
     }
