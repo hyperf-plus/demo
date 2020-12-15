@@ -113,7 +113,7 @@ class AuthController
         // 一行多列
         $content->row(function (Row $row) {
             $row->gutter(15);
-            $row->column(8, $this->card('项目地址:<a href=http://github.com/hyperf-plus/admin>http://github.com/hyperf-plus/admin</a><br>国内    :<a href=https://gitee.com/hyperf-plus/hyperf-admin>https://gitee.com/hyperf-plus/hyperf-admin</a>', '#4DB6AC'));
+            $row->column(8, $this->card('此演示项目地址:<a href=http://github.com/hyperf-plus/demo>http://github.com/hyperf-plus/demo</a><br>项目地址:<a href=http://github.com/hyperf-plus/admin>http://github.com/hyperf-plus/admin</a><br>国内    :<a href=https://gitee.com/hyperf-plus/hyperf-admin>https://gitee.com/hyperf-plus/hyperf-admin</a>', '#4DB6AC'));
             $row->column(8, $this->card('<a href=https://qm.qq.com/cgi-bin/qm/qr?k=pCkT8bLR-scfzGhiLYAu2AuEu5pzOfdD&authKey=0L9w5QrmZJQpDdaH9R5WpPK5mUPyh1RiM3nqcRggpMpM8heAgBBXWdzuk9zkyRko&noverify=0>QQ群号：512465490</a>', '#4DB6AC'));
             $row->column(8, $this->card('col-md-8', '#7986CB'));
         });
