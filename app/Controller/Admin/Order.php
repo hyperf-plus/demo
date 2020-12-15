@@ -85,12 +85,12 @@ class Order extends AbstractAdminController
         $grid->column('photo.image', '订单照片')->component(Image::make())->width(100);
         $grid->column('user.nickname', '所属用户');
         $grid->column('address.detail', '邮寄地址')->width(200)->customValue(function ($model) {
-            return '收货人：' . $model->address->real_name
-                . '<br>电话：' . $model->address->phone
-                . '<br>地址：' . $model->address->province
-                . $model->address->city
-                . $model->address->district
-                . $model->address->detail;
+            return '收货人：' . ($model->address->real_name??'')
+                . '<br>电话：' . ($model->address->phone??'')
+                . '<br>地址：' . ($model->address->province??'')
+                . ($model->address->city??'')
+                . ($model->address->district??'')
+                . ($model->address->detail??'');
         });
         $grid->column('price_total', '订单金额')->customValue(function ($model) {
             return toPrice($model->money);
