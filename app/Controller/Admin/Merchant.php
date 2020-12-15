@@ -8,6 +8,7 @@ declare(strict_types=1);
  * @contact  4213509@qq.com
  * @license  https://github.com/hyperf-plus/admin/blob/master/LICENSE
  */
+
 namespace App\Controller\Admin;
 
 use App\Service\MachineService;

@@ -147,7 +147,6 @@ JS;
 
         $grid->bottom(function (Content $content) {
             $js = <<<JS
-
 ref.\$bus.emit("gButton",{data:"ref.attrs.content = '一共选择了：'+self.selectionRows.length;ref.dialogTableVisible=false;ref.attrs.type='success';",self:ref})
 
 JS;

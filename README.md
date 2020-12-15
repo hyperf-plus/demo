@@ -1,36 +1,18 @@
-# Introduction
+# HPlus Admin  演示代码，
+如果您有好的示例代码分享，欢迎提交
 
-This is a skeleton application using the Hyperf framework. This application is meant to be used as a starting place for those looking to get their feet wet with Hyperf Framework.
+# 安装此项目请
+1、下载项目
+```php
+git clone https://github.com/hyperf-plus/demo
+```
+2、配置数据库
+3、导入根目录下的sql文件
 
-# Requirements
+## 演示地址：
+##### <a href="http://shop.sh.cn/auth">http://shop.sh.cn/auth</a>
+##### 账户 admin
+##### 密码 admin
 
-Hyperf has some requirements for the system environment, it can only run under Linux and Mac environment, but due to the development of Docker virtualization technology, Docker for Windows can also be used as the running environment under Windows.
-
-The various versions of Dockerfile have been prepared for you in the [hyperf\hyperf-docker](https://github.com/hyperf/hyperf-docker) project, or directly based on the already built [hyperf\hyperf](https://hub.docker.com/r/hyperf/hyperf) Image to run.
-
-When you don't want to use Docker as the basis for your running environment, you need to make sure that your operating environment meets the following requirements:  
-
- - PHP >= 7.2
- - Swoole PHP extension >= 4.4，and Disabled `Short Name`
- - OpenSSL PHP extension
- - JSON PHP extension
- - PDO PHP extension （If you need to use MySQL Client）
- - Redis PHP extension （If you need to use Redis Client）
- - Protobuf PHP extension （If you need to use gRPC Server of Client）
-
-# Installation using Composer
-
-The easiest way to create a new Hyperf project is to use Composer. If you don't have it already installed, then please install as per the documentation.
-
-To create your new Hyperf project:
-
-$ composer create-project hyperf/hyperf-skeleton path/to/install
-
-Once installed, you can run the server immediately using the command below.
-
-$ cd path/to/install
-$ php bin/hyperf.php start
-
-This will start the cli-server on port `9501`, and bind it to all network interfaces. You can then visit the site at `http://localhost:9501/`
-
-which will bring up Hyperf default home page.
+#### 欢迎加入HPlus交流群，群聊号码：512465490
+点击链接加入群聊【hyperf-admin交流群】：<a href="https://qm.qq.com/cgi-bin/qm/qr?k=pCkT8bLR-scfzGhiLYAu2AuEu5pzOfdD&authKey=0L9w5QrmZJQpDdaH9R5WpPK5mUPyh1RiM3nqcRggpMpM8heAgBBXWdzuk9zkyRko&noverify=0">群聊号码：512465490</a>
