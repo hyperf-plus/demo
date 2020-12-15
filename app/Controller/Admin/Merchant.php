@@ -20,15 +20,18 @@ use HPlus\UI\Components\Form\CSwitch;
 use HPlus\UI\Components\Form\DateTimePicker;
 use HPlus\UI\Components\Form\Input;
 use HPlus\UI\Components\Form\Select;
+use HPlus\UI\Components\Form\Upload;
 use HPlus\UI\Components\Grid\Boole;
 use HPlus\UI\Components\Grid\Tag;
 use HPlus\UI\Components\Widgets\Button;
 use HPlus\UI\Components\Widgets\Dialog;
+use HPlus\UI\Components\Widgets\Divider;
 use HPlus\UI\Components\Widgets\Markdown;
 use HPlus\UI\Form;
 use HPlus\UI\Form\FormActions;
 use HPlus\UI\Grid;
 use HPlus\UI\Grid\Actions\ActionButton;
+use HPlus\UI\Layout\Column;
 use HPlus\UI\Layout\Content;
 use HPlus\UI\Layout\Row;
 use HPlus\UI\UI;
@@ -73,9 +76,12 @@ class Merchant extends AbstractAdminController
         $grid->column('merchant_id', '编号')->width(80);
         $grid->column('name', '商户名称')->defaultValue('-');
         $grid->column('sales', '总销量')->itemPrefix('￥')->width(100);
-        $grid->column('total_money', '累计资金')->width(100);
-        $grid->column('wd_money', '累计资金')->itemPrefix('￥')->width(100);
-        $grid->column('total_money', '累计资金')->itemPrefix('￥')->width(100);
+        $grid->column('total', '资金')->customValue(function (\App\Model\Merchant $Model) {
+            return
+                "累计资金：" . $Model->total_money . "<br/>" .
+                "提现资金：" . $Model->wd_money . "<br/>" .
+                "冻结资金：" . $Model->lock_money;
+        });
         $grid->column('real_name', '商户联系人')->defaultValue('-')->width(80);
         $grid->column('phone', '联系电话')->defaultValue('-')->width(100);
         $grid->column('address', '商户地址')->defaultValue('-');
@@ -90,21 +96,31 @@ class Merchant extends AbstractAdminController
         $form = new Form(new \App\Model\Merchant());
         $form->className('m-15');
         $form->row(function (Row $row, Form $form) {
-            $row->gutter(10);
+            $row->gutter(20);
+            $row->column(24, function (Column $column) {
+                $column->row(Divider::make("基本资料"));
+            });
             $row->column(11, $form->rowItem('name', '商户名称')
                 ->component(Input::make())->required());
             $row->column(11, $form->rowItem('address', '商户地址')->component(Input::make()->showWordLimit()->maxlength(20))->required());
         });
 
+
         $form->row(function (Row $row, Form $form) {
-            $row->gutter(10);
+            $row->gutter(20);
+            $row->column(24, function (Column $column) {
+                $column->row(Divider::make("联系方式"));
+            });
             $row->column(11, $form->rowItem('real_name', '联系人')
                 ->component(Input::make())->required());
             $row->column(11, $form->rowItem('phone', '联系电话')->component(Input::make()->showWordLimit()->maxlength(20))->required());
         });
 
         $form->row(function (Row $row, Form $form) {
-            $row->gutter(10);
+            $row->gutter(20);
+            $row->column(24, function (Column $column) {
+                $column->row(Divider::make("银行资料"));
+            });
             $row->column(11, $form->rowItem('bank_name', '开户行')
                 ->component(Input::make())->required());
             $row->column(11, $form->rowItem('bank_user', '开户姓名')->component(Input::make()->showWordLimit()->maxlength(20))->required());
