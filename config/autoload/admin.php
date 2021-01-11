@@ -11,10 +11,13 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf-plus/blob/master/LICENSE
  */
 
+use HPlus\Admin\Middleware\AuthMiddleware;
+use HPlus\Admin\Middleware\LogsMiddleware;
 use HPlus\Admin\Model\Admin\Administrator;
 use HPlus\Admin\Model\Admin\Menu;
 use HPlus\Admin\Model\Admin\Permission;
 use HPlus\Admin\Model\Admin\Role;
+use HPlus\Permission\Middleware\PermissionMiddleware;
 
 return [
     //后台名称 null不显示
@@ -45,9 +48,6 @@ return [
         [
             'href' => 'https://github.com/hyperf-plus/admin',
             'title' => 'hyperf版官网',
-        ], [
-            'href' => 'https://github.com/SmallRuralDog/laravel-vue-admin',
-            'title' => 'laravel版官网',
         ],
         [
             'href' => 'https://www.yuque.com/hyperf-plus/ui/hplus-ui',
@@ -63,7 +63,7 @@ return [
         'api_prefix' => env('ADMIN_ROUTE_API_PREFIX', '/'),  # 默认API地址
         'home' => env('ADMIN_ROUTE_HOME_URL', '/auth/main'),              # 默认后台首页
         'namespace' => 'App\\Admin\\Controllers',
-        'middleware' => [\HPlus\Permission\Middleware\PermissionMiddleware::class], #默认权限处理器
+        'middleware' => [AuthMiddleware::class, LogsMiddleware::class, PermissionMiddleware::class], #默认权限处理器
     ],
     'directory' => '', //app_path('Admin'),
     'https' => env('ADMIN_HTTPS', false),
@@ -134,10 +134,7 @@ return [
          * or specific method to path like: get:admin/auth/logs.
          */
         'except' => [
-            'admin/auth/logs*',
-            'admin-api/auth/logs*',
-            'admin',
-            'admin-api',
+            '/admin/logs*',
         ],
     ],
     'check_route_permission' => true,

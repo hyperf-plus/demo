@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
+use App\Service\MachineService;
 use HPlus\Admin\Controller\AbstractAdminController;
 use HPlus\Route\Annotation\AdminController;
 use HPlus\Route\Annotation\GetApi;

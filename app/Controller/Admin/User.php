@@ -71,6 +71,7 @@ class User extends AbstractAdminController
             ->dialogForm($this->form()->isDialog()->backButtonName('关闭'))
             ->autoHeight();
         $grid->filter(function (Grid\Filter $filter) {
+
             $filter->like('mobile')->component(Input::make()->placeholder('手机号'));
             $filter->like('id_card')->component(Input::make()->placeholder('身份证号'));
         });

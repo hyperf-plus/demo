@@ -25,7 +25,7 @@ use HPlus\Validate\Annotations\RequestValidation;
 use http\Exception;
 use Hyperf\Di\Annotation\Inject;
 use App\Validate\UserValidate;
-use Mzh\Helper\DbHelper\GetQueryHelper;
+use HPlus\Helper\DbHelper\GetQueryHelper;
 
 /**
  * @ApiController(tag="用户接口")
