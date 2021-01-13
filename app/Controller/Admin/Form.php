@@ -9,6 +9,7 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
+
 namespace App\Controller\Admin;
 
 use HPlus\Admin\Controller\AbstractAdminController;
@@ -46,7 +47,6 @@ use HPlus\UI\Components\Widgets\Markdown;
 use HPlus\UI\Components\Widgets\Text;
 use HPlus\UI\Form as asForm;
 use HPlus\UI\Form\FormActions;
-use HPlus\UI\Form\Utils\VIfEval;
 use HPlus\UI\Layout\Content;
 use HPlus\UI\Layout\Row;
 
@@ -90,18 +90,15 @@ class Form extends AbstractAdminController
             $row->item(Divider::make('动态注入事件演示，最大金额不能小于最小金额'));
         });
         $form->item('min_price', '最小金额')->component(Input::make()->type('number'));
-        $form->item('max_price', '最大金额')->component(Input::make()->type('number'))->vifEval(function (VIfEval $eval) {
-            $eval->props(['max_price']);
-            $eval->functionStr('
-               (function(_this,formData){
-               if (formData.max_price > 0 && formData.max_price < formData.min_price){
-                _this.$message.error("最大金额不能小于最小金额")
-                formData.max_price =  formData.min_price
+        $form->item('max_price', '最大金额')->component(Input::make()->type('number'))->refData(
+            'demoForm',
+            '
+               if (ref.formData.max_price > 0 && ref.formData.max_price < ref.formData.min_price){
+                ref.$message.error("最大金额不能小于最小金额")
+                ref.formData.max_price = ref.formData.min_price
                }
-               return true;
-               }(this,this.formData))
-            ');
-        });
+            '
+        );
         $form->row(function (Row $row) {
             $row->item(Divider::make('基本表单演示'));
         });
