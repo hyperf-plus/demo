@@ -100,6 +100,27 @@ class Form extends AbstractAdminController
             '
         );
         $form->row(function (Row $row) {
+            $row->item(Divider::make('动态注入事件，异步加载'));
+        });
+
+        $form->item('zhi', '选择')->component(Select::make()->options([
+            ['value' => 111, 'label' => '测试1'],
+            ['value' => 2, 'label' => '测试2'],
+        ]))->refData('demoForm', '
+        ref.loading = true; //启一个动画 （可选特效）
+        // 可以携带值  从 ref.formData取  也可以根据响应数据设置表单内的值
+        ref.$http.get("/admin/user/150?get_data=true&id=" + ref.formData.zhi)  
+        .then(res => {
+           console.log("这里是请求成功后的回调，也可以根据响应数据设置表单内的值");
+           console.log("ref.formData.字段名= 值  可以在这里做赋值和计算");
+           console.log(res)
+        })
+        .finally(() => {
+         //完成后关闭动画
+         ref.loading = false; 
+        });
+        ');
+        $form->row(function (Row $row) {
             $row->item(Divider::make('基本表单演示'));
         });
         $form->item('input')->component(Input::make())->required()->inputWidth(10);
