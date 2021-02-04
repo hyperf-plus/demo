@@ -123,59 +123,59 @@ class Form extends AbstractAdminController
         $form->row(function (Row $row) {
             $row->item(Divider::make('基本表单演示'));
         });
-        $form->item('input','输入框')->component(Input::make())->required()->inputWidth(10);
-        $form->item('textarea','文本域')->component(Input::make()->textarea())->required();
-        $form->item('password','密码')->component(Input::make()->password())->required();
-        $form->item('file','文件')->component(Upload::make()->file()->multiple()->limit(3));
-        $form->item('image','图片')->component(Upload::make()->image()->multiple()->limit(3)->width(200)->height(100));
-        $form->item('avatar','头像')->component(Upload::make()->avatar());
-        $form->item('IconChoose','图标')->component(IconChoose::make())->required();
-        $form->item('InputNumber','数字')->component(InputNumber::make())->required('number');
-        $form->item('Select','选择')->component(Select::make()->options(function () {
+        $form->item('input', '输入框')->component(Input::make())->required()->inputWidth(10);
+        $form->item('textarea', '文本域')->component(Input::make()->textarea())->required();
+        $form->item('password', '密码')->component(Input::make()->password())->required();
+        $form->item('file', '文件')->component(Upload::make()->file()->multiple()->limit(3));
+        $form->item('image', '图片')->component(Upload::make()->image()->multiple()->limit(3)->width(200)->height(100));
+        $form->item('avatar', '头像')->component(Upload::make()->avatar());
+        $form->item('IconChoose', '图标')->component(IconChoose::make())->required();
+        $form->item('InputNumber', '数字')->component(InputNumber::make())->required('number');
+        $form->item('Select', '选择')->component(Select::make()->options(function () {
             return collect(range(0, 50))->map(function () {
                 return SelectOption::make(11233, '测试3')->avatar('https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png')->desc('测试2');
             })->all();
         }))->required();
-        $form->item('Select-multiple')->component(Select::make()->multiple()->filterable()->options(function () {
+        $form->item('Select-multiple', '多选')->component(Select::make()->multiple()->filterable()->options(function () {
             return collect(range(0, 50))->map(function () {
                 return SelectOption::make(123123, '哈哈哈')->avatar('https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png')->desc('测试');
             })->all();
         }))->required('array');
 
-        $form->item('Checkbox','单选')->component(Checkbox::make(99999, 'hahah'))->defaultValue(0);
+        $form->item('Checkbox', '单选')->component(Checkbox::make(99999, 'hahah'))->defaultValue(0);
 
-        $form->item('CheckboxGroup','多选')->component(CheckboxGroup::make([10], [
+        $form->item('CheckboxGroup', '多选')->component(CheckboxGroup::make([10], [
             Checkbox::make(10, '测试1'),
             Checkbox::make(20, '测试2'),
         ]))->required('array');
 
-        $form->item('RadioGroup','单选')->component(RadioGroup::make(11, [
+        $form->item('RadioGroup', '单选')->component(RadioGroup::make(11, [
             Radio::make(10, '测试3'),
             Radio::make(11, '测试4'),
         ]))->required('number');
 
-        $form->item('Switch','切换')->component(CSwitch::make(true))->refData('demoForm', function () {
+        $form->item('Switch', '切换')->component(CSwitch::make(true))->refData('demoForm', function () {
             return <<<'JS'
 ref.formData.Switch2 = self.value
 JS;
-            })->help('我可以控制下面的‘切换2’哦');
-        $form->item('Switch2','切换2')->component(CSwitch::make(true))->ref('Switch2');
+        })->help('我可以控制下面的‘切换2’哦');
+        $form->item('Switch2', '切换2')->component(CSwitch::make(true))->ref('Switch2');
 
         $form->item('滑块')->defaultValue([20, 30])->component(Slider::make()->showInput()->range(true)->max(40)->min(10)->showStops());
         $form->item('滑块2')->defaultValue(20)->component(Slider::make()->max(40)->min(10)->vertical(true, '100px'));
 
-        $form->item('TimePicker','时间')->component(TimePicker::make()->pickerOptions([
+        $form->item('TimePicker', '时间')->component(TimePicker::make()->pickerOptions([
             'start' => '00:00',
             'step' => '00:30',
             'end' => '24:00',
         ])->placeholder('TimePicker'));
-        $form->item('TimePicker2','时间区间')->component(TimePicker::make([])->pickerOptions([
+        $form->item('TimePicker2', '时间区间')->component(TimePicker::make([])->pickerOptions([
             'start' => '00:00',
             'step' => '00:30',
             'end' => '24:00',
         ])->isRange()->rangeSeparator('至')->placeholder('TimePicker'));
 
-        $form->item('DatePicker','日期')->component(DatePicker::make())->ref('DatePicker')->componentRightComponent(function () {
+        $form->item('DatePicker', '日期')->component(DatePicker::make())->ref('DatePicker')->componentRightComponent(function () {
             return (new Content())->row(function (Row $row) {
                 $row->item(Text::make('选择类型：'));
                 $typeStr = 'year/month/date/dates/week/datetime/datetimerange/daterange/monthrange';
@@ -188,9 +188,9 @@ JS;
                 }
             })->className('ml-10');
         });
-        $form->item('DatePicker2','日期区间')->component(DatePicker::make([])->type('daterange'));
+        $form->item('DatePicker2', '日期区间')->component(DatePicker::make([])->type('daterange'));
 
-        $form->item('DateTimePicker','日期时间')->component(DateTimePicker::make())->ref('DateTimePicker')->componentRightComponent(function () {
+        $form->item('DateTimePicker', '日期时间')->component(DateTimePicker::make())->ref('DateTimePicker')->componentRightComponent(function () {
             return (new Content())->row(function (Row $row) {
                 $row->item(Text::make('选择类型：'));
                 $typeStr = 'year/month/date/week/datetime/datetimerange/daterange';
@@ -204,10 +204,10 @@ JS;
             })->className('ml-10');
         });
 
-        $form->item('Rate','评分')->component(Rate::make(1));
-        $form->item('ColorPicker','颜色选择器')->component(ColorPicker::make('#ff6600'));
+        $form->item('Rate', '评分')->component(Rate::make(1));
+        $form->item('ColorPicker', '颜色选择器')->component(ColorPicker::make('#ff6600'));
 
-        $form->item('Cascader','级联选择器')
+        $form->item('Cascader', '级联选择器')
             ->component(function () {
                 return Cascader::make()->options((new Menu())->toTree())->value('id')->label('title')->expandTrigger('hover')->ref('Cascader');
             })
@@ -234,13 +234,13 @@ ref.attrs.html = "动态注入change事件，获取到选择的数据，展现�
 JS;
             });
 
-        $form->item('Transfer','穿梭框', '权限', 'permissions.id')->component(
+        $form->item('Transfer', '穿梭框', '权限', 'permissions.id')->component(
             Transfer::make()->data(Permission::get()->map(function ($item) {
                 return TransferData::make($item->id, $item->name);
             }))->titles(['可授权', '已授权'])->filterable()
         );
 
-        $form->item('WangEditor','富文本')->component(WangEditor::make()->style('height:200px;')->className('flex-sub'));
+        $form->item('WangEditor', '富文本')->component(WangEditor::make()->style('height:200px;')->className('flex-sub'));
 
         $form->top(function (Content $content) {
             $content->row($this->code())->className('mb-10');
