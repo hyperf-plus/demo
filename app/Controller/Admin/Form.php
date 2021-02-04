@@ -125,20 +125,20 @@ class Form extends AbstractAdminController
         });
         $form->item('input', '输入框')->component(Input::make())->required()->inputWidth(10);
         $form->item('textarea', '文本域')->component(Input::make()->textarea())->required();
-        $form->item('password', '密码')->component(Input::make()->password())->required();
+        $form->item('password', '密码')->component(Input::make()->password()->showPassword())->required();
         $form->item('file', '文件')->component(Upload::make()->file()->multiple()->limit(3));
         $form->item('image', '图片')->component(Upload::make()->image()->multiple()->limit(3)->width(200)->height(100));
         $form->item('avatar', '头像')->component(Upload::make()->avatar());
         $form->item('IconChoose', '图标')->component(IconChoose::make())->required();
         $form->item('InputNumber', '数字')->component(InputNumber::make())->required('number');
         $form->item('Select', '选择')->component(Select::make()->options(function () {
-            return collect(range(0, 50))->map(function () {
-                return SelectOption::make(11233, '测试3')->avatar('https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png')->desc('测试2');
+            return collect(range(0, 50))->map(function ($id) {
+                return SelectOption::make($id, '测试'.$id)->avatar('https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png')->desc('测试');
             })->all();
-        }))->required();
+        }))->required('number');
         $form->item('Select-multiple', '多选')->component(Select::make()->multiple()->filterable()->options(function () {
-            return collect(range(0, 50))->map(function () {
-                return SelectOption::make(123123, '哈哈哈')->avatar('https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png')->desc('测试');
+            return collect(range(0, 10))->map(function ($id) {
+                return SelectOption::make($id, '测试'.$id)->avatar('https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png')->desc('测试');
             })->all();
         }))->required('array');
 
