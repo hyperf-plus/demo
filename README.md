@@ -10,7 +10,7 @@ git clone https://github.com/hyperf-plus/demo
 3、导入根目录下的sql文件
 
 ## 演示地址：
-##### <a href="http://shop.sh.cn/auth">http://shop.sh.cn/auth</a>
+##### <a href="https://demo.hyperf.plus/auth">https://demo.hyperf.plus/auth</a>
 ##### 账户 admin
 ##### 密码 admin
 
