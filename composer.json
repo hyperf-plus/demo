@@ -1,0 +1,79 @@
+{
+    "name": "hyperf-plus/app",
+    "description": "HPlus development application for loading local packages.",
+    "type": "project",
+    "license": "MIT",
+    "keywords": [
+        "php",
+        "swoole",
+        "hyperf"
+    ],
+    "require": {
+        "php": ">=8.1",
+        "hyperf/cache": "^3.1",
+        "hyperf/command": "^3.1",
+        "hyperf/config": "^3.1",
+        "hyperf/db-connection": "^3.1",
+        "hyperf/framework": "^3.1",
+        "hyperf/guzzle": "^3.1",
+        "hyperf/http-server": "^3.1",
+        "hyperf/logger": "^3.1",
+        "hyperf/memory": "^3.1",
+        "hyperf/process": "^3.1",
+        "hyperf/redis": "^3.1",
+        "hyperf-plus/route": "@dev",
+        "hyperf-plus/swagger": "@dev",
+        "hyperf-plus/validate": "@dev"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.0",
+        "hyperf/devtool": "^3.1",
+        "hyperf/testing": "^3.1",
+        "mockery/mockery": "^1.0",
+        "phpstan/phpstan": "^1.0",
+        "phpunit/phpunit": ">=7.0",
+        "swoole/ide-helper": "^5.1"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../route"
+        },
+        {
+            "type": "path",
+            "url": "../swagger"
+        },
+        {
+            "type": "path",
+            "url": "../validate"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        },
+        "files": []
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "start": "php ./bin/hyperf.php start",
+        "test": "phpunit",
+        "cs-fix": "php-cs-fixer fix $1",
+        "analyse": "phpstan analyse --memory-limit 1024M -l 0 -v src",
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-autoload-dump": [
+            "rm -rf runtime/container"
+        ]
+    },
+    "extra": {
+        "hyperf": {
+            "config": "App\\ConfigProvider"
+        }
+    }
+}
