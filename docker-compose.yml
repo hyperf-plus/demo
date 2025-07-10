@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  hyperf:
+    image: hyperf/hyperf:7.4-alpine-v3.11-swoole
+    container_name: hyperf-app
+    ports:
+      - "9501:9503"
+    volumes:
+      - .:/opt/www
+    working_dir: /opt/www
+    environment:
+      - APP_ENV=dev
+      - SCAN_CACHEABLE=false
+    depends_on:
+      - redis
+      - mysql
+    command: ["php", "bin/hyperf.php", "start"]
+    networks:
+      - hyperf-network
+
+  redis:
+    image: redis:6.2-alpine
+    container_name: hyperf-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - hyperf-network
+
+  mysql:
+    image: mysql:8.0
+    container_name: hyperf-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: hyperf
+      MYSQL_USER: hyperf
+      MYSQL_PASSWORD: hyperf123
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./20201215.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - hyperf-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: hyperf-phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: root
+    depends_on:
+      - mysql
+    networks:
+      - hyperf-network
+
+volumes:
+  redis_data:
+  mysql_data:
+
+networks:
+  hyperf-network:
+    driver: bridge
