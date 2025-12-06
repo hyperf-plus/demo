@@ -1,43 +1,47 @@
-# Introduction
+# HPlus App（测试示例项目）
 
-This is a skeleton application using the Hyperf framework. This application is meant to be used as a starting place for those looking to get their feet wet with Hyperf Framework.
+用于本地验证 HPlus 4.0 插件（route / validate / swagger）的示例项目。
 
-# Requirements
+## 环境要求
 
-Hyperf has some requirements for the system environment, it can only run under Linux and Mac environment, but due to the development of Docker virtualization technology, Docker for Windows can also be used as the running environment under Windows.
+- PHP ≥ 8.1
+- Hyperf ≥ 3.1
+- 扩展：swoole、json、mbstring、pcntl
 
-The various versions of Dockerfile have been prepared for you in the [hyperf/hyperf-docker](https://github.com/hyperf/hyperf-docker) project, or directly based on the already built [hyperf/hyperf](https://hub.docker.com/r/hyperf/hyperf) Image to run.
-
-When you don't want to use Docker as the basis for your running environment, you need to make sure that your operating environment meets the following requirements:  
-
- - PHP >= 8.0
- - Any of the following network engines
-   - Swoole PHP extension >= 4.5，with `swoole.use_shortname` set to `Off` in your `php.ini`
-   - Swow PHP extension (Beta)
- - JSON PHP extension
- - Pcntl PHP extension
- - OpenSSL PHP extension （If you need to use the HTTPS）
- - PDO PHP extension （If you need to use the MySQL Client）
- - Redis PHP extension （If you need to use the Redis Client）
- - Protobuf PHP extension （If you need to use the gRPC Server or Client）
-
-# Installation using Composer
-
-The easiest way to create a new Hyperf project is to use [Composer](https://getcomposer.org/). If you don't have it already installed, then please install as per [the documentation](https://getcomposer.org/download/).
-
-To create your new Hyperf project:
+## 依赖安装
 
 ```bash
-$ composer create-project hyperf/hyperf-skeleton path/to/install
+composer install
 ```
 
-Once installed, you can run the server immediately using the command below.
+## 运行
 
 ```bash
-$ cd path/to/install
-$ php bin/hyperf.php start
+php bin/hyperf.php start
 ```
 
-This will start the cli-server on port `9501`, and bind it to all network interfaces. You can then visit the site at `http://localhost:9501/`
+启动后访问：
+- 示例接口：`http://localhost:9501/test`
+- Swagger 文档（依赖 swagger 插件）：`http://localhost:9501/swagger`
 
-which will bring up Hyperf default home page.
+## 相关插件版本
+
+| 插件 | 版本 | 说明 |
+|------|------|------|
+| hyperf-plus/route | ^4.0 | 路由 4.0（kebab-case、静态路由优先） |
+| hyperf-plus/validate | ^4.0 | 验证 4.0（FormRequest、Query/Body 分离） |
+| hyperf-plus/swagger | ^4.0 | Swagger 4.0（懒加载+缓存，OpenAPI 3.1.1） |
+
+## 常用命令
+
+```bash
+# 启动服务
+php bin/hyperf.php start
+
+# 运行测试
+composer test
+```
+
+## 注意
+
+本项目仅用于 4.0 功能验证，不建议直接用于生产。
