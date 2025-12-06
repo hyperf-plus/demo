@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\Api;
 
 use HPlus\Route\Annotation\ApiController;
 use HPlus\Route\Annotation\GetApi;
@@ -12,11 +12,11 @@ use HPlus\Route\Annotation\DeleteApi;
 use HPlus\Validate\Annotations\RequestValidation;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
-
+use App\Controller\AbstractController;
 /**
  * 用户管理
  */
-#[ApiController(prefix: "/api/users", tag: "用户管理", description: "用户相关接口")]
+#[ApiController(tag: "用户管理", description: "用户相关接口")]
 class UserController extends AbstractController
 {
     /**
@@ -53,7 +53,8 @@ class UserController extends AbstractController
         'name' => 'required|string|max:50',
         'email' => 'required|email',
         'password' => 'required|min:6',
-        'phone' => 'required|mobile'
+        // 使用正则验证手机号（大陆 11 位）
+        'phone|手机号' => 'required|regex:/^1[3-9]\\d{9}$/'
     ])]
     public function store(RequestInterface $request)
     {
@@ -81,7 +82,8 @@ class UserController extends AbstractController
     #[RequestValidation(rules: [
         'name' => 'string|max:50',
         'email' => 'email',
-        'phone|手机号' => 'mobile'
+        // 非必填，但若传入则校验格式
+        'phone|手机号' => 'regex:/^1[3-9]\\d{9}$/'
     ])]
     public function update(int $id, RequestInterface $request)
     {

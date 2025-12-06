@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\Api;
 
 use App\Validator\ProductValidator;
 use HPlus\Route\Annotation\ApiController;
@@ -11,11 +11,12 @@ use HPlus\Route\Annotation\PutApi;
 use HPlus\Validate\Annotations\RequestValidation;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
+use App\Controller\AbstractController;
 
 /**
  * 产品管理
  */
-#[ApiController(prefix: "/api/products", tag: "产品管理")]
+#[ApiController(tag: "产品管理")]
 class ProductController extends AbstractController
 {
     /**

@@ -67,18 +67,7 @@ return [
 
     // 标签定义
     'tags' => [
-        [
-            'name' => 'Users',
-            'description' => 'User management operations',
-            'externalDocs' => [
-                'description' => 'More info',
-                'url' => 'https://example.com/docs/users',
-            ],
-        ],
-        [
-            'name' => 'Auth',
-            'description' => 'Authentication operations',
-        ],
+
     ],
 
     // 外部文档
