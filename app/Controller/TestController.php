@@ -192,7 +192,7 @@ public function store(RequestInterface $request): ResponseInterface
             'email|邮箱' => 'required|email',
             'age|年龄' => 'integer|min:1|max:120'
         ],
-        dateType: 'json'
+        mode: 'json'
     )]
     public function postTest(): array
     {
@@ -211,7 +211,7 @@ public function store(RequestInterface $request): ResponseInterface
             'username|用户名' => 'required|string|max:20',
             'password|密码' => 'required|string|min:6'
         ],
-        dateType: 'form'
+        mode: 'form'
     )]
     public function formTest(): array
     {

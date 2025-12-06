@@ -8,7 +8,7 @@ use App\Validator\ProductValidator;
 use HPlus\Route\Annotation\ApiController;
 use HPlus\Route\Annotation\PostApi;
 use HPlus\Route\Annotation\PutApi;
-use HPlus\Validate\Annotations\Validation;
+use HPlus\Validate\Annotations\RequestValidation;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 
@@ -22,7 +22,7 @@ class ProductController extends AbstractController
      * 创建产品
      */
     #[PostApi(path: "", summary: "创建产品")]
-    #[Validation(validate: ProductValidator::class, scene: "create")]
+    #[RequestValidation(validate: ProductValidator::class, scene: "create")]
     public function store(RequestInterface $request)
     {
         $data = $request->all();
@@ -38,7 +38,7 @@ class ProductController extends AbstractController
      * 更新产品
      */
     #[PutApi(path: "{id}", summary: "更新产品")]
-    #[Validation(validate: ProductValidator::class, scene: "update")]
+    #[RequestValidation(validate: ProductValidator::class, scene: "update")]
     public function update(int $id, RequestInterface $request)
     {
         return [
@@ -51,7 +51,7 @@ class ProductController extends AbstractController
      * 导入产品
      */
     #[PostApi(path: "import", summary: "批量导入产品")]
-    #[Validation(validate: ProductValidator::class, scene: "import")]
+    #[RequestValidation(validate: ProductValidator::class, scene: "import")]
     public function import(RequestInterface $request)
     {
         $products = $request->input('products', []);

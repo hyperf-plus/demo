@@ -23,7 +23,9 @@
         "hyperf/redis": "^3.1",
         "hyperf-plus/route": "@dev",
         "hyperf-plus/swagger": "@dev",
-        "hyperf-plus/validate": "@dev"
+        "hyperf-plus/validate": "@dev",
+        "hyperf/validation": "^3.1",
+        "hyperf/translation": "^3.1"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.0",

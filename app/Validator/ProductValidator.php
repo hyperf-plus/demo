@@ -4,65 +4,74 @@ declare(strict_types=1);
 
 namespace App\Validator;
 
-use HPlus\Validate\Validate;
+use Hyperf\Validation\Request\FormRequest;
 
 /**
- * 产品验证器
+ * 产品验证器（Hyperf 风格）
  */
-class ProductValidator extends Validate
+class ProductValidator extends FormRequest
 {
-    protected $rule = [
-        'name' => 'required|string|between:2,100',
-        'description' => 'string|max:500',
-        'price' => 'required|numeric|min:0',
-        'stock' => 'required|integer|min:0',
-        'category_id' => 'required|integer|min:1',
-        'sku' => 'required|string|max:50|unique:products',
-        'images' => 'array|max:10',
-        'images.*' => 'url',
-        'status' => 'integer|in:0,1'
+    /**
+     * 场景定义
+     */
+    protected array $scenes = [
+        'create' => ['name', 'description', 'price', 'stock', 'category_id', 'sku', 'images', 'status'],
+        'update' => ['name', 'description', 'price', 'stock', 'category_id', 'images', 'status'],
+        'import' => ['products'],
     ];
-    
-    protected $message = [
-        'name.required' => '产品名称不能为空',
-        'name.between' => '产品名称长度必须在2-100个字符之间',
-        'price.required' => '产品价格不能为空',
-        'price.numeric' => '产品价格必须是数字',
-        'price.min' => '产品价格不能小于0',
-        'stock.required' => '库存数量不能为空',
-        'stock.integer' => '库存数量必须是整数',
-        'stock.min' => '库存数量不能小于0',
-        'sku.unique' => 'SKU已存在',
-        'images.max' => '产品图片最多10张'
-    ];
-    
+
     /**
-     * 创建场景
+     * 验证规则
      */
-    protected function sceneCreate()
+    public function rules(): array
     {
-        return $this->only(['name', 'description', 'price', 'stock', 'category_id', 'sku', 'images', 'status']);
+        return [
+            'name' => 'required|string|between:2,100',
+            'description' => 'string|max:500',
+            'price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
+            'category_id' => 'required|integer|min:1',
+            'sku' => 'required|string|max:50',
+            'images' => 'array|max:10',
+            'images.*' => 'url',
+            'status' => 'integer|in:0,1',
+            'products' => 'required|array|min:1|max:1000',
+            'products.*.name' => 'required|string|between:2,100',
+            'products.*.price' => 'required|numeric|min:0',
+            'products.*.stock' => 'required|integer|min:0',
+            'products.*.sku' => 'required|string|max:50',
+        ];
     }
-    
+
     /**
-     * 更新场景
+     * 错误消息
      */
-    protected function sceneUpdate()
+    public function messages(): array
     {
-        return $this->remove('sku', 'unique')
-            ->only(['name', 'description', 'price', 'stock', 'category_id', 'sku', 'images', 'status']);
+        return [
+            'name.required' => '产品名称不能为空',
+            'name.between' => '产品名称长度必须在2-100个字符之间',
+            'price.required' => '产品价格不能为空',
+            'price.numeric' => '产品价格必须是数字',
+            'price.min' => '产品价格不能小于0',
+            'stock.required' => '库存数量不能为空',
+            'stock.integer' => '库存数量必须是整数',
+            'stock.min' => '库存数量不能小于0',
+            'images.max' => '产品图片最多10张',
+        ];
     }
-    
+
     /**
-     * 导入场景
+     * 字段别名
      */
-    protected function sceneImport()
+    public function attributes(): array
     {
-        return $this->only(['products'])
-            ->rule('products', 'required|array|min:1|max:1000')
-            ->rule('products.*.name', 'required|string|between:2,100')
-            ->rule('products.*.price', 'required|numeric|min:0')
-            ->rule('products.*.stock', 'required|integer|min:0')
-            ->rule('products.*.sku', 'required|string|max:50');
+        return [
+            'name' => '产品名称',
+            'price' => '价格',
+            'stock' => '库存',
+            'category_id' => '分类',
+            'sku' => 'SKU',
+        ];
     }
-} 
+}
